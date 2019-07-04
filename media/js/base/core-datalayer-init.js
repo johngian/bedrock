@@ -40,7 +40,10 @@ $(function() {
     });
 
     if (client.isFirefoxDesktop || client.isFirefoxAndroid) {
+        var t0 = performance.now();
         client.getFirefoxDetails(function(details) {
+            var t1 = performance.now();
+            console.log('Call to getFirefoxDetails from core-datalayer-init took ' + (t1 - t0) + ' milliseconds.');
             dataLayer.push(details);
             firefoxDetailsComplete = true;
             checkSendCoreDataLayer();

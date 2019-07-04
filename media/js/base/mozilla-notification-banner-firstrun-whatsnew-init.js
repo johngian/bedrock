@@ -49,7 +49,10 @@ $(function() {
 
     // Notification should only be shown to Firefox desktop users more than 2 major versions out of date.
     if (client.isFirefoxDesktop) {
+        var t0 = performance.now();
         client.getFirefoxDetails(function(details) {
+            var t1 = performance.now();
+            console.log('Call to getFirefoxDetails from notification-banner took ' + (t1 - t0) + ' milliseconds.');
             // Only run the query if the /whatsnew or /firstrun page being viewed is
             // at least 2 major versions out of date. (Bug 1406299).
             if (client.isFirefoxURLOutOfDate(2)) {

@@ -24,7 +24,10 @@ Mozilla.FxaForm = (function(Mozilla) {
         var mozillaonlineAction = fxaForm.dataset.mozillaonlineAction;
 
         if (mozillaonlineAction) {
+            var t0 = performance.now();
             Mozilla.Client.getFirefoxDetails(function(data) {
+                var t1 = performance.now();
+                console.log('Call to getFirefoxDetails from mozilla-fxa-form took ' + (t1 - t0) + ' milliseconds.');
                 // only switch to China re-pack URL if UITour call is successful
                 // (marked by data.accurate being true)
                 if (data.accurate && data.distribution && data.distribution.toLowerCase() === 'mozillaonline') {

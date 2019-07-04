@@ -26,7 +26,12 @@
         /* Bug 1264843: In partner distribution of desktop Firefox, switch the
         downloads to corresponding partner build of Firefox for Android. */
         if (client.isFirefoxDesktop) {
-            client.getFirefoxDetails(utils.maybeSwitchToDistDownloadLinks);
+            var t0 = performance.now();
+            client.getFirefoxDetails(function() {
+                var t1 = performance.now();
+                console.log('Call to getFirefoxDetails from base-page-init took ' + (t1 - t0) + ' milliseconds.');
+                utils.maybeSwitchToDistDownloadLinks(client);
+            });
         }
 
         // if window.load happened already, fire onWindowLoad
